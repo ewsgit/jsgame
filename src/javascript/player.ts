@@ -57,13 +57,6 @@ export default class player {
             if (this.x < 0) {
                 this.x = 0;
                 this.speed = 0;
-                if (this.width < 20) {
-                    this.width++;
-                }
-            } else {
-                if (this.width > 16) {
-                    this.width--;
-                }
             }
             if (this.speed < this.maxSpeed) {
                 this.speed += this.acceleration;
@@ -75,8 +68,6 @@ export default class player {
             if (this.y + this.height > canvas.height) {
                 this.y = canvas.height - this.height;
                 this.speed = 0;
-            } else if (this.height > 16) {
-                this.height--;
             }
             if (this.speed < this.maxSpeed) {
                 this.speed += this.acceleration;
@@ -87,9 +78,6 @@ export default class player {
             this.moving = true;
             if (this.speed < this.maxSpeed) {
                 this.speed += this.acceleration;
-            }
-            if (this.width > 16) {
-                this.width--;
             }
         }
         if (
@@ -109,16 +97,14 @@ export default class player {
         }
     }
     render() {
-        ctx.fillStyle = "#000000";
-        ctx.fillText("Speed:" + this.speed, 0, 10);
+		ctx.fillStyle = "#000000";
+		ctx.fillText("Speed:" + this.speed, 0, 10);
         ctx.fillText("X:" + this.x, 0, 20);
         ctx.fillText("Y:" + this.y, 0, 30);
         ctx.fillText("Direction:" + this.direction, 0, 40);
         ctx.fillText("Moving:" + this.moving, 0, 50);
         ctx.fillText("Width:" + this.width, 0, 60);
         ctx.fillText("Height:" + this.height, 0, 70);
-        // ctx.drawImage(this.texture, this.x, this.y);
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.texture, this.x, this.y);
     }
 }

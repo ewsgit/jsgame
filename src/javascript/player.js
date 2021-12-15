@@ -50,14 +50,6 @@ var player = /** @class */ (function () {
             if (this.x < 0) {
                 this.x = 0;
                 this.speed = 0;
-                if (this.width < 20) {
-                    this.width++;
-                }
-            }
-            else {
-                if (this.width > 16) {
-                    this.width--;
-                }
             }
             if (this.speed < this.maxSpeed) {
                 this.speed += this.acceleration;
@@ -70,9 +62,6 @@ var player = /** @class */ (function () {
                 this.y = canvas.height - this.height;
                 this.speed = 0;
             }
-            else if (this.height > 16) {
-                this.height--;
-            }
             if (this.speed < this.maxSpeed) {
                 this.speed += this.acceleration;
             }
@@ -82,9 +71,6 @@ var player = /** @class */ (function () {
             this.moving = true;
             if (this.speed < this.maxSpeed) {
                 this.speed += this.acceleration;
-            }
-            if (this.width > 16) {
-                this.width--;
             }
         }
         if (pressedKeys.indexOf("w") === -1 &&
@@ -110,9 +96,7 @@ var player = /** @class */ (function () {
         ctx.fillText("Moving:" + this.moving, 0, 50);
         ctx.fillText("Width:" + this.width, 0, 60);
         ctx.fillText("Height:" + this.height, 0, 70);
-        // ctx.drawImage(this.texture, this.x, this.y);
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.texture, this.x, this.y);
     };
     return player;
 }());
