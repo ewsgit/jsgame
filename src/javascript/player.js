@@ -94,8 +94,6 @@ var player = /** @class */ (function () {
         ctx.fillText("Y:" + this.y, 0, 30);
         ctx.fillText("Direction:" + this.direction, 0, 40);
         ctx.fillText("Moving:" + this.moving, 0, 50);
-        ctx.fillText("Width:" + this.width, 0, 60);
-        ctx.fillText("Height:" + this.height, 0, 70);
         ctx.drawImage(this.texture, this.x, this.y);
     };
     return player;
