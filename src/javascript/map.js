@@ -4,7 +4,7 @@ var map = /** @class */ (function () {
     }
     map.prototype.generateMap = function () { };
     map.prototype.render = function () {
-        ctx.fillStyle = "#00FF00";
+        ctx.fillStyle = "#888888";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
     return map;
