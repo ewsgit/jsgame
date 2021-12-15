@@ -1,0 +1,26 @@
+{
+  "name": "jsgame",
+  "version": "1.0.0",
+  "description": "a game made in js",
+  "main": ".",
+  "scripts": {
+    "start": "cd src && concurrently \"tsc\" \"lite-server\""
+  },
+  "keywords": [
+    "game",
+    "js",
+    "html",
+    "canvas",
+    "htmlcanvas",
+    "ts",
+    "webgame"
+  ],
+  "author": "ewsgit",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.4.0",
+    "lite-server": "^2.6.1",
+    "tsc": "^2.0.3",
+    "typescript": "^4.5.4"
+  }
+}
