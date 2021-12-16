@@ -2,10 +2,10 @@ import { pressedKeys } from "./controls.js";
 import { canvas, ctx } from "./index.js";
 var player = /** @class */ (function () {
     function player() {
-        this.x = 0;
-        this.y = 0;
         this.width = 16;
         this.height = 16;
+        this.x = this.width / 2;
+        this.y = this.height / 2;
         this.speed = 0;
         this.maxSpeed = 15;
         this.acceleration = 0.1;
@@ -13,7 +13,7 @@ var player = /** @class */ (function () {
         this.direction = "down";
         this.moving = false;
         this.texture = new Image();
-        this.texture.src = "./player.png";
+        this.texture.src = "./assets/player.png";
         this.texture.width = this.width;
         this.texture.height = this.height;
         this.tile = [0, 0];
@@ -38,8 +38,8 @@ var player = /** @class */ (function () {
         if (pressedKeys.indexOf("w") !== -1) {
             this.direction = "up";
             this.moving = true;
-            if (this.y < 0) {
-                this.y = 0;
+            if (this.y - (this.height / 2) < 0) {
+                this.y = 0 + (this.height / 2);
                 this.speed = 0;
             }
             if (this.speed < this.maxSpeed) {
@@ -49,8 +49,8 @@ var player = /** @class */ (function () {
         if (pressedKeys.indexOf("a") !== -1) {
             this.direction = "left";
             this.moving = true;
-            if (this.x < 0) {
-                this.x = 0;
+            if (this.x - (this.width / 2) < 0) {
+                this.x = 0 + (this.width / 2);
                 this.speed = 0;
             }
             if (this.speed < this.maxSpeed) {
@@ -60,8 +60,8 @@ var player = /** @class */ (function () {
         if (pressedKeys.indexOf("s") !== -1) {
             this.direction = "down";
             this.moving = true;
-            if (this.y + this.height > canvas.height) {
-                this.y = canvas.height - this.height;
+            if (this.y + (this.height / 2) > canvas.height) {
+                this.y = canvas.height - (this.height / 2);
                 this.speed = 0;
             }
             if (this.speed < this.maxSpeed) {
@@ -80,7 +80,6 @@ var player = /** @class */ (function () {
             pressedKeys.indexOf("s") === -1 &&
             pressedKeys.indexOf("d") === -1) {
             this.moving = false;
-            this.direction = "none";
             if (this.speed > 0) {
                 this.speed -= this.deacceleration;
             }
