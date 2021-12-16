@@ -40,14 +40,12 @@ export default class player {
             this.x -= this.speed;
         } else if (this.direction === "right") {
             this.x += this.speed;
-        } else {
-            this.speed = 0;
         }
         if (pressedKeys.indexOf("w") !== -1) {
             this.direction = "up";
             this.moving = true;
-            if (this.y - (this.height / 2) < 0) {
-                this.y = 0 + (this.height / 2);
+            if (this.y - this.height / 2 < 0) {
+                this.y = 0 + this.height / 2;
                 this.speed = 0;
             }
             if (this.speed < this.maxSpeed) {
@@ -57,8 +55,8 @@ export default class player {
         if (pressedKeys.indexOf("a") !== -1) {
             this.direction = "left";
             this.moving = true;
-            if (this.x - (this.width / 2) < 0) {
-                this.x = 0 + (this.width / 2);
+            if (this.x - this.width / 2 < 0) {
+                this.x = 0 + this.width / 2;
                 this.speed = 0;
             }
             if (this.speed < this.maxSpeed) {
@@ -68,8 +66,8 @@ export default class player {
         if (pressedKeys.indexOf("s") !== -1) {
             this.direction = "down";
             this.moving = true;
-            if (this.y + (this.height / 2) > canvas.height) {
-                this.y = canvas.height - (this.height / 2);
+            if (this.y + this.height / 2 > canvas.height) {
+                this.y = canvas.height - this.height / 2;
                 this.speed = 0;
             }
             if (this.speed < this.maxSpeed) {
@@ -90,12 +88,7 @@ export default class player {
             pressedKeys.indexOf("d") === -1
         ) {
             this.moving = false;
-            if (this.speed > 0) {
-                this.speed -= this.deacceleration;
-            }
-            if (this.speed < 0) {
-                this.speed = 0;
-            }
+            this.speed = 0;
         }
     }
     render() {
@@ -106,11 +99,11 @@ export default class player {
         ctx.fillText("Direction:" + this.direction, 0, 40);
         ctx.fillText("Moving:" + this.moving, 0, 50);
         ctx.fillText("Tile:" + this.tile, 0, 60);
-		ctx.fillStyle = "#FFFFFF";
-		ctx.fillRect(this.tile[0]*16, this.tile[1]*16, 16, 16)
-		ctx.fillStyle = "#00ff00";
-		ctx.fillRect(this.x, 0, 1, canvas.height);
-        ctx.fillRect(0, this.y, canvas.width, 1);
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(this.tile[0] * 16, this.tile[1] * 16, 16, 16);
+        ctx.fillStyle = "#000000";
+        ctx.fillRect(this.x - 3, 0, 6, canvas.height);
+        ctx.fillRect(0, this.y - 3, canvas.width, 6);
         ctx.drawImage(this.texture, this.x - 8, this.y - 8);
     }
 }

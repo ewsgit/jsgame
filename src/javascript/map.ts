@@ -1,28 +1,51 @@
 import { ctx, canvas } from "./index.js";
 
 export default class map {
-	map: Array<Array<number>>;
+    map: Array<Array<number>>;
+    width: number;
+    height: number;
+    tiles: Object;
     constructor() {
-		this.map = this.generateMap()
-	}
+        this.width = Math.floor(canvas.width / 16);
+        this.height = Math.floor(canvas.height / 16);
+        this.map = this.generateMap();
+        this.tiles = {};
+    }
     generateMap() {
-		let map = new Array<Array<number>>();
-		for (let i = 0; i < 10; i++) {
-			map[i] = new Array<number>();
-			for (let j = 0; j < 10; j++) {
-				map[i][j] = Math.floor(Math.random() * 2);
-			}
-		}
-		return map;
-	}
+        let map = [];
+        for (let i = 0; i < this.height; i++) {
+            map[i] = [];
+            for (let j = 0; j < this.width; j++) {
+				console.log(Math.floor(Math.random() * 2));
+                switch (Math.floor(Math.random() * 4)) {
+                    case 0:
+                        map[i][j] = "./assets/tile1.png";
+                        break;
+                    case 1:
+                        map[i][j] = "./assets/tile2.png";
+                        break;
+                    case 2:
+                        map[i][j] = "./assets/tile3.png";
+                        break;
+                    case 3:
+                        map[i][j] = "./assets/tile4.png";
+                        break;
+                }
+            }
+        }
+        return map;
+    }
     render() {
-        ctx.fillStyle = "#888888";
-        for (let i = 0; i < 10; i++) {
-			for (let j = 0; j < 10; j++) {
-				if (this.map[i][j] === 1) {
-					ctx.fillRect(i * 16, j * 16, 16, 16);
-				}
-			}
-		}
+        for (let i = 0; i < this.height; i++) {
+            for (let j = 0; j < this.width; j++) {
+                if (this.tiles[this.map[i][j]]) {
+                    ctx.drawImage(this.tiles[this.map[i][j]], j * 16, i * 16);
+                } else {
+                    this.tiles[this.map[i][j]] = new Image();
+					console.log(this.map[i][j]);
+                    this.tiles[this.map[i][j]].src = this.map[i][j];
+                }
+            }
+        }
     }
 }
