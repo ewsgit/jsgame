@@ -12,6 +12,7 @@ export default class player {
     acceleration: number;
     deacceleration: number;
     texture: HTMLImageElement;
+    tile: Array<number>;
     constructor() {
         this.x = 0;
         this.y = 0;
@@ -27,8 +28,10 @@ export default class player {
         this.texture.src = "./player.png";
         this.texture.width = this.width;
         this.texture.height = this.height;
+        this.tile = [0, 0];
     }
     tick() {
+        this.tile = [Math.floor(this.x < 0 ? 0 : this.x / 16), Math.floor(this.y < 0 ? 0 : this.y / 16)];
         if (this.direction === "up") {
             this.y -= this.speed;
         } else if (this.direction === "down") {
@@ -97,12 +100,18 @@ export default class player {
         }
     }
     render() {
-		ctx.fillStyle = "#000000";
-		ctx.fillText("Speed:" + this.speed, 0, 10);
+        ctx.fillStyle = "#000000";
+        ctx.fillText("Speed:" + this.speed, 0, 10);
         ctx.fillText("X:" + this.x, 0, 20);
         ctx.fillText("Y:" + this.y, 0, 30);
         ctx.fillText("Direction:" + this.direction, 0, 40);
         ctx.fillText("Moving:" + this.moving, 0, 50);
-        ctx.drawImage(this.texture, this.x, this.y);
+        ctx.fillText("Tile:" + this.tile, 0, 60);
+		ctx.fillStyle = "#FFFFFF";
+		ctx.fillRect(this.tile[0]*16, this.tile[1]*16, 16, 16)
+		ctx.fillStyle = "#00ff00";
+		ctx.fillRect(this.x, 0, 1, canvas.height);
+        ctx.fillRect(0, this.y, canvas.width, 1);
+        ctx.drawImage(this.texture, this.x - 8, this.y - 8);
     }
 }
