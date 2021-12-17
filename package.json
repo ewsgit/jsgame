@@ -4,7 +4,7 @@
   "description": "a game made in js",
   "main": ".",
   "scripts": {
-    "start": "cd src && concurrently \"tsc\" \"lite-server\""
+    "start": "concurrently \"tsc\" \"lite-server\""
   },
   "keywords": [
     "game",

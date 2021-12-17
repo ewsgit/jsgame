@@ -92,18 +92,35 @@ export default class player {
         }
     }
     render() {
-        ctx.fillStyle = "#000000";
+		ctx.fillStyle = "#000000"
+		ctx.fillRect(0, 0, 250, 250);
+        ctx.fillStyle = "#ffffff";
         ctx.fillText("Speed:" + this.speed, 0, 10);
         ctx.fillText("X:" + this.x, 0, 20);
         ctx.fillText("Y:" + this.y, 0, 30);
         ctx.fillText("Direction:" + this.direction, 0, 40);
         ctx.fillText("Moving:" + this.moving, 0, 50);
         ctx.fillText("Tile:" + this.tile, 0, 60);
-        ctx.fillStyle = "#FFFFFF";
+        ctx.fillStyle = "#00FF00";
         ctx.fillRect(this.tile[0] * 16, this.tile[1] * 16, 16, 16);
-        ctx.fillStyle = "#000000";
-        ctx.fillRect(this.x - 3, 0, 6, canvas.height);
-        ctx.fillRect(0, this.y - 3, canvas.width, 6);
+		ctx.fillStyle = "#ffff00";
+		switch (this.direction) {
+			case "up":
+				ctx.fillRect(this.tile[0] * 16, (this.tile[1] - 1) * 16, this.width, this.height)
+				break;
+			case "down":
+				ctx.fillRect(this.tile[0] * 16, (this.tile[1] + 1) * 16, this.width, this.height)
+				break;
+			case "left":
+				ctx.fillRect((this.tile[0] - 1) * 16, this.tile[1] * 16, this.width, this.height)
+				break;
+			case "right":
+				ctx.fillRect((this.tile[0] + 1) * 16, this.tile[1] * 16, this.width, this.height)
+				break;
+		}
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(this.x - 1, 0, 2, canvas.height);
+        ctx.fillRect(0, this.y - 1, canvas.width, 2);
         ctx.drawImage(this.texture, this.x - 8, this.y - 8);
     }
 }
